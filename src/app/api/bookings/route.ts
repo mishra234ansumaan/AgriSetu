@@ -1,11 +1,10 @@
-import { NextRequest } from "next/server";
 import { db } from "@/db";
 import { sql, eq } from "drizzle-orm";
 import { bookings, facilities } from "@/db/schema";
 
 export const dynamic = "force-dynamic";
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   const body = (await req.json()) as {
     kind: string;
     refId: number;

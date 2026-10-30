@@ -1,4 +1,3 @@
-import { NextRequest } from "next/server";
 import { allCrops, sellAdvice, priceSnapshot } from "@/lib/queries";
 import { db } from "@/db";
 import { facilities, pools } from "@/db/schema";
@@ -30,15 +29,15 @@ const CROP_ALIASES: Record<string, string> = {
   cotton: "cotton", kapa: "cotton", "କପା": "cotton",
 };
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   const { message, lang } = (await req.json()) as { message: string; lang?: string };
   const O = lang === "od";
   const msg = (message || "").toLowerCase();
 
   const cropRows = await allCrops();
   const matched =
-    cropRows.find((c) => msg.includes(c.name.toLowerCase()) || (c.nameOdia && message?.includes(c.nameOdia))) ??
-    cropRows.find((c) => {
+    cropRows.find((c: { name: string; nameOdia: string | null }) => msg.includes(c.name.toLowerCase()) || (c.nameOdia && message?.includes(c.nameOdia))) ??
+    cropRows.find((c: { name: string }) => {
       const key = Object.keys(CROP_ALIASES).find((k) => msg.includes(k.toLowerCase()) || message?.includes(k));
       return key && c.name.toLowerCase() === CROP_ALIASES[key];
     });
@@ -68,8 +67,8 @@ export async function POST(req: NextRequest) {
 
   if (wantsStorage) {
     const cold = await db.select().from(facilities);
-    const top = cold.filter((f) => f.type === "cold").sort((a, b) => a.ratePerQPerDay - b.ratePerQPerDay).slice(0, 3);
-    const lines = top.map((f) => `${f.name} (${f.district}) — ${inr(f.ratePerQPerDay)}/q/${O ? "ଦିନ" : "day"}`).join(" · ");
+    const top = cold.filter((f: typeof facilities.$inferSelect) => f.type === "cold").sort((a: typeof facilities.$inferSelect, b: typeof facilities.$inferSelect) => a.ratePerQPerDay - b.ratePerQPerDay).slice(0, 3);
+    const lines = top.map((f: typeof facilities.$inferSelect) => `${f.name} (${f.district}) — ${inr(f.ratePerQPerDay)}/q/${O ? "ଦିନ" : "day"}`).join(" · ");
     return Response.json({
       text: O
         ? `ବର୍ତ୍ତମାନ ସବୁଠାରୁ ସସ୍ତା କୋଲ୍ଡ ଷ୍ଟୋରେଜ: ${lines}। ଭଣ୍ଡାର ପୃଷ୍ଠାରେ ମାନଚିତ୍ର, ଦୂରତା ଓ ତାତ୍କ୍ଷଣିକ ବୁକିଂ ମିଳିବ।`
