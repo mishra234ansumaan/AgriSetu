@@ -73,7 +73,7 @@ export default async function FarmProofPage() {
           <Reveal className="flex justify-center">
             <Tilt>
               <div className="relative w-[340px] overflow-hidden rounded-[1.8rem] p-7 text-paper shadow-2xl shadow-forest-950/50 sm:w-[400px]">
-                <Image src="/images/card-texture.png" alt="" fill className="object-cover" />
+                <Image src="/images/farmproof-bg.png" alt="" fill className="object-cover" />
                 <div className="absolute inset-0 bg-forest-950/30" />
                 <div className="relative">
                   <div className="flex items-center justify-between">

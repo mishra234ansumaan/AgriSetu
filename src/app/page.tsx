@@ -51,7 +51,13 @@ export default async function Landing() {
     <div>
       {/* ============================== HERO ============================== */}
       <section className="grain relative -mt-16 overflow-hidden bg-forest-950 pt-16 text-paper">
-        <Image src="/images/hero-farmer.jpg" alt="Odia farmer in a golden paddy field at sunrise" fill priority className="object-cover opacity-45" />
+        <Image
+  src="/images/home-hero-bg.png"
+  alt="Odia farmer in a golden paddy field at sunrise"
+  fill
+  priority
+  className="object-cover opacity-50"
+/>
         <div className="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/55 to-forest-950" />
         <div className="absolute inset-0 bg-gradient-to-r from-forest-950/80 via-transparent to-forest-950/40" />
 
@@ -226,7 +232,7 @@ export default async function Landing() {
       {/* ========================== RESCUE STRIP ========================== */}
       <section className="mx-auto grid max-w-7xl gap-8 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:py-28">
         <Reveal className="relative overflow-hidden rounded-[2rem]">
-          <Image src="/images/rescue.jpg" alt="Freshly harvested vegetables in a bamboo basket" width={900} height={680} className="h-full w-full object-cover" />
+         <Image src="/images/harvest-produce.png" alt="Freshly harvested vegetables in a bamboo basket" width={900} height={680} className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-forest-950/85 via-transparent to-transparent" />
           <div className="absolute bottom-5 left-5 flex flex-wrap gap-2">
             {(["fresh", "sell-soon", "urgent", "critical"] as const).map((s) => (
@@ -292,7 +298,7 @@ export default async function Landing() {
           <Reveal>
             <Tilt>
               <div className="relative w-[340px] overflow-hidden rounded-[1.6rem] p-6 text-paper shadow-2xl shadow-forest-950/40 sm:w-[380px]">
-                <Image src="/images/card-texture.png" alt="" fill className="object-cover" />
+                <Image src="/images/farmproof-bg.png" alt="" fill className="object-cover" />
                 <div className="absolute inset-0 bg-forest-950/35" />
                 <div className="relative">
                   <div className="flex items-center justify-between">
